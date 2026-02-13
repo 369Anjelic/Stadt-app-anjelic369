@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nürnberg Entdecken – Unwritten Companions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* UNWRITTEN FARBEN (Exakt aus Styleguide) */
+            --blue: #3987b8;           /* Primary Blue */
+            --black: #3e4447;          /* Dark Gray/Black */
+            --white: #ffffff;          /* White */
+            --light-gray: #f4f5f5;     /* Light Gray */
+            
+            /* TYPOGRAFIE */
+            --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --h1: 48px;
+            --h2: 36px;
+            --h3: 28px;
+            --body: 16px;
+        }
+
+        * {
+            font-family: var(--font);
+        }
+
+        body {
+            color: var(--black);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* ============================================================================
+           HEADER
+           ============================================================================ */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--light-gray);
+            padding: 20px 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        header .inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue) 0%, #2d6a99 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(57, 135, 184, 0.3);
+        }
+
+        .logo-text {
+            line-height: 1.2;
+        }
+
+        .logo-text strong {
+            font-size: 18px;
+            display: block;
+        }
+
+        .logo-text small {
+            font-size: 11px;
+            color: var(--blue);
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        .chat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 18px;
+        }
+
+        .chat-icon:hover {
+            background: #2d6a99;
+            transform: scale(1.1);
+        }
+
+        /* ============================================================================
+           HERO SECTION
+           ============================================================================ */
+
+        .hero {
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+            padding: 100px 40px 80px;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: var(--h1);
+            margin-bottom: 20px;
+            color: var(--black);
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--black);
+            opacity: 0.7;
+            margin-bottom: 60px;
+            line-height: 1.8;
+        }
+
+        /* GLASS ORB */
+        .orb-section {
+            margin: 60px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .orb {
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9) 0%, rgba(57,135,184,0.08) 100%);
+            border: 2.5px solid var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 
+                0 40px 100px rgba(57, 135, 184, 0.3),
+                inset -40px -40px 80px rgba(0,0,0,0.04),
+                inset 40px 40px 80px rgba(255,255,255,0.9);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-40px); }
+        }
+
+        .orb::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+            opacity: 0.12;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.12; }
+            50% { transform: scale(1.08); opacity: 0.2; }
+        }
+
+        .orb-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .orb-question {
+            font-size: 56px;
+            color: var(--blue);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .orb-text {
+            font-size: 14px;
+            color: var(--black);
+            opacity: 0.6;
+            max-width: 240px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2d6a99;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(57, 135, 184, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--black);
+            border: 1px solid var(--black);
+            opacity: 0.8;
+        }
+
+        .btn-secondary:hover {
+            background: var(--black);
+            color: white;
+        }
+
+        /* ============================================================================
+           CONTENT SECTIONS
+           ============================================================================ */
+
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .section-title {
+            font-size: var(--h2);
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--black);
+        }
+
+        /* TOURS GRID */
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 40px;
+        }
+
+        .tour-card {
+            background: var(--white);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(57, 135, 184, 0.15);
+            border-color: var(--blue);
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--blue) 0%, #2d6a99 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .tour-content {
+            padding: 30px;
+        }
+
+        .tour-name {
+            font-size: var(--h3);
+            margin-bottom: 10px;
+            color: var(--black);
+        }
+
+        .tour-desc {
+            font-size: 14px;
+            color: var(--black);
+            opacity: 0.7;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .tour-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tour-btn:hover {
+            background: #2d6a99;
+        }
+
+        /* ============================================================================
+           CHAT SIDEBAR
+           ============================================================================ */
+
+        .chat-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: var(--white);
+            border-left: 1px solid var(--light-gray);
+            z-index: 300;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .chat-panel.active {
+            transform: translateX(0);
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            font-size: 18px;
+            color: var(--black);
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--black);
+            opacity: 0.6;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--blue);
+            color: white;
+            border-radius: 12px 4px 12px 12px;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: var(--light-gray);
+            color: var(--black);
+            border-radius: 4px 12px 12px 12px;
+        }
+
+        .chat-input-area {
+            padding: 15px;
+            border-top: 1px solid var(--light-gray);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: 14px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        .chat-send {
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .chat-send:hover {
+            background: #2d6a99;
+        }
+
+        /* ============================================================================
+           FOOTER
+           ============================================================================ */
+
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 60px 40px 20px;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 13px;
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* ============================================================================
+           RESPONSIVE
+           ============================================================================ */
+
+        @media (max-width: 768px) {
+            :root {
+                --h1: 36px;
+                --h2: 28px;
+                --h3: 24px;
+            }
+
+            .orb {
+                width: 280px;
+                height: 280px;
+            }
+
+            .chat-panel {
+                width: 100%;
+            }
+
+            header .inner {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .section {
+                padding: 50px 20px;
+            }
+
+            .tours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="inner">
+            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="logo-icon">◆</div>
+                <div class="logo-text">
+                    <strong>Unwritten</strong>
+                    <small>Nürnberg</small>
+                </div>
+            </div>
+            <nav>
+                <a onclick="scrollTo('tours')">Tours</a>
+                <a onclick="scrollTo('about')">Über</a>
+                <a onclick="toggleChat()">
+                    <button class="chat-icon" title="Chat mit der Glaskugel">💬</button>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>Nürnberg Entdecken</h1>
+            <p>Stelle deine Fragen an die Glaskugel – sie antwortet mit Geschichten, Orten und Geheimnissen einer der schönsten Städte Deutschlands.</p>
+
+            <div class="orb-section">
+                <div class="orb">
+                    <div class="orb-content">
+                        <div class="orb-question">?</div>
+                        <div class="orb-text">Frag die Glaskugel nach Nürnberg</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="scrollTo('tours')">Touren Erkunden</button>
+                <button class="btn btn-secondary" onclick="toggleChat()">Mit KI Chatten</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOURS -->
+    <section class="section" id="tours">
+        <h2 class="section-title">Entdecke Nürnbergs Schätze</h2>
+        <div class="tours-grid" id="toursGrid"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about" style="background: var(--light-gray);">
+        <h2 class="section-title">Über Nürnberg</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 16px; line-height: 1.8; color: var(--black); opacity: 0.8; margin-bottom: 30px;">
+                Nürnberg, eine der schönsten mittelalterlichen Städte Deutschlands, hat eine über 900-jährige Geschichte. Von der mächtigen Burg über die gotischen Kirchen bis zu den gepflasterten Gassen der Altstadt – jede Ecke erzählt eine Geschichte.
+            </p>
+            <p style="font-size: 16px; line-height: 1.8; color: var(--black); opacity: 0.8;">
+                Diese App nutzt AI-Technologie, um dir die Stadt auf eine neue, persönliche Weise näherzubringen. Stelle Fragen, entdecke Routen und höre die Geschichten Nürnbergs.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>Unwritten</h4>
+                <p>KI-gestützte Stadterkundung. Jede Stadt hat Geschichten. Wir erzählen sie.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <p>
+                    Touren • Chatbot<br>
+                    Über uns • Kontakt
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Unwritten GmbH</h4>
+                <p>
+                    Adlerweg 6<br>
+                    90530 Wendelstein<br>
+                    post@unwritten.studio
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Unwritten Studio. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- CHAT PANEL -->
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <h3>Die Glaskugel 🔮</h3>
+            <button class="chat-close" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">Hallo! Ich bin die Glaskugel. Frag mich alles über Nürnberg! 🏰</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Deine Frage..." />
+            <button class="chat-send" onclick="sendMessage()">↑</button>
+        </div>
+    </div>
+
+    <script>
+        // NÜRNBERG LOCATIONS DATA
+        const locations = [
+            {
+                emoji: '🏰',
+                name: 'Nürnberger Burg',
+                desc: 'Die mächtige Burg über der Stadt mit über 900 Jahren Geschichte',
+                info: 'Die Nürnberger Burg ist seit 1140 das Wahrzeichen der Stadt. Sie war Reichsburg und ist eines der wertvollsten Monumente deutscher Architektur. Von der Burg aus genießt man atemberaubende Ausblicke über Nürnberg.'
+            },
+            {
+                emoji: '⛪',
+                name: 'Sebalduskirche',
+                desc: 'Gotische Meisterwerk mit wunderschönen Zwiebeldächern',
+                info: 'Die Sebalduskirche, seit 1225, ist eine der ältesten Kirchen Nürnbergs. Mit ihrer herrlichen Gotik und den typischen Zwiebeldächern ist sie ein Meisterwerk der Architektur. Innen beherbergt sie kostbare Kunstwerke.'
+            },
+            {
+                emoji: '👸',
+                name: 'Frauenkirche',
+                desc: 'Prächtige gotische Fassade mit berühmtem Glockenspiel',
+                info: 'Die Frauenkirche mit ihrer prächtigen Fassade ist eines der schönsten gotischen Gebäude Deutschlands. Das Glockenspiel mit den "Männlein" erklingt täglich um 12 Uhr – ein Spektakel für Besucher.'
+            },
+            {
+                emoji: '🎄',
+                name: 'Christkindles Markt',
+                desc: 'Der älteste Weihnachtsmarkt Deutschlands seit 1839',
+                info: 'Jedes Jahr verwandelt sich der Hauptmarkt in ein Märchenland. Der Christkindles Markt mit über 180 Ständen ist einer der schönsten Weihnachtsmärkte Europas.'
+            },
+            {
+                emoji: '🎨',
+                name: 'Germanisches Museum',
+                desc: 'Eines der bedeutendsten Museen für deutsche Kultur und Geschichte',
+                info: 'Das Germanische Nationalmuseum beherbergt über eine Million Objekte. Es ist das größte Museum für die Kunst und Kulturgeschichte des deutschsprachigen Raumes.'
+            },
+            {
+                emoji: '🚶',
+                name: 'Altstadt',
+                desc: 'Mittelalterliche Gassen mit Fachwerkhäusern und Geschichte',
+                info: 'Die Altstadt Nürnbergs ist eine der schönsten und besterhaltenen mittelalterlichen Stadtanlagen Deutschlands. Ein Spaziergang durch die gepflasterten Gassen ist eine Reise in die Zeit.'
+            }
+        ];
+
+        // RENDER TOURS
+        function renderTours() {
+            const grid = document.getElementById('toursGrid');
+            grid.innerHTML = locations.map((loc) => `
+                <div class="tour-card" onclick="openTour('${loc.name}', '${loc.info}')">
+                    <div class="tour-image">${loc.emoji}</div>
+                    <div class="tour-content">
+                        <div class="tour-name">${loc.name}</div>
+                        <div class="tour-desc">${loc.desc}</div>
+                        <button class="tour-btn">Mehr erfahren</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // CHAT FUNCTIONALITY
+        function toggleChat() {
+            document.getElementById('chatPanel').classList.toggle('active');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // ADD USER MESSAGE
+            addMessage(message, 'user');
+            input.value = '';
+
+            // SIMULATE BOT RESPONSE
+            setTimeout(() => {
+                const response = getAIResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
+
+        function addMessage(text, type) {
+            const messages = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            div.textContent = text;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function getAIResponse(question) {
+            const q = question.toLowerCase();
+
+            // SIMPLE CHATBOT LOGIC
+            if (q.includes('burg')) {
+                return 'Die Nürnberger Burg ist seit 1140 das Wahrzeichen Nürnbergs. Sie war Reichsburg und ist wunderschön! 🏰';
+            }
+            if (q.includes('kirche')) {
+                return 'Nürnberg hat wunderschöne Kirchen wie die Sebalduskirche und die Frauenkirche mit ihren charakteristischen Zwiebeldächern.';
+            }
+            if (q.includes('weihnacht')) {
+                return 'Der Christkindles Markt ist der älteste Weihnachtsmarkt Deutschlands – absolut magisch! 🎄';
+            }
+            if (q.includes('altstadt')) {
+                return 'Die Altstadt ist wunderbar! Gepflasterte Gassen, Fachwerkhäuser und Geschichte an jeder Ecke. Du solltest einen Spaziergang machen!';
+            }
+            if (q.includes('geschichte')) {
+                return 'Nürnberg hat über 900 Jahre Geschichte. Von der Burg über die Kirchen bis zur Altstadt – jede Ecke erzählt eine Geschichte.';
+            }
+            if (q.includes('essen') || q.includes('food') || q.includes('bratwurst')) {
+                return 'Nürnbergs Bratwürste sind berühmt! Probiere sie unbedingt in einem der traditionellen Restaurants in der Altstadt. 🍖';
+            }
+            if (q.includes('museum')) {
+                return 'Das Germanische Nationalmuseum ist eines der größten und wichtigsten Museen für deutsche Kultur. Über eine Million Objekte!';
+            }
+            return 'Das ist eine gute Frage! Nürnberg hat viel zu bieten. Schau dir unsere Touren an oder frag mich spezifischer nach einer bestimmten Sehenswürdigkeit!';
+        }
+
+        // SCROLL FUNCTIONS
+        function scrollTo(id) {
+            const el = document.getElementById(id);
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openTour(name, info) {
+            // Could open a modal, but for now just show in chat
+            toggleChat();
+            setTimeout(() => {
+                document.getElementById('chatInput').value = `Erzähl mir mehr über ${name}`;
+                sendMessage();
+            }, 300);
+        }
+
+        // ENTER KEY IN CHAT
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('chatInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendMessage();
+            });
+            renderTours();
+        });
+    </script>
+</body>
+</html>

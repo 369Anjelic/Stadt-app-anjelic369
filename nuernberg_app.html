@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nürnberg Entdecken – Unwritten Companions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* UNWRITTEN FARBEN */
+            --color-primary: #000000;
+            --color-secondary: #3987b8;
+            --color-light: #ffffff;
+            --color-light-gray: #f4f5f5;
+            --color-dark-gray: #3e4447;
+            
+            /* TYPOGRAFIE */
+            --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-h1: 48px;
+            --font-h2: 36px;
+            --font-h3: 28px;
+            --font-body: 16px;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--color-primary);
+            background-color: var(--color-light);
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ============================================================================
+           HEADER / NAVIGATION
+           ============================================================================ */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--color-light);
+            border-bottom: 1px solid var(--color-light-gray);
+            padding: 20px 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-orb {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #2d6a99 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text strong {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            font-size: 12px;
+            color: var(--color-secondary);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* ============================================================================
+           HERO SECTION – GLASKUGEL METAPHER
+           ============================================================================ */
+
+        .hero {
+            background: linear-gradient(135deg, var(--color-light-gray) 0%, var(--color-light) 100%);
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: var(--font-h1);
+            margin-bottom: 20px;
+            color: var(--color-primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--color-dark-gray);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+
+        /* GLASS ORB */
+        .glass-orb-container {
+            margin: 60px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .glass-orb {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, rgba(57,135,184,0.1) 100%);
+            border: 3px solid var(--color-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 
+                0 30px 80px rgba(57,135,184,0.25),
+                inset -30px -30px 60px rgba(0,0,0,0.05),
+                inset 30px 30px 60px rgba(255,255,255,0.8);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .orb-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+            opacity: 0.15;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.05); opacity: 0.25; }
+        }
+
+        .orb-text {
+            position: relative;
+            z-index: 2;
+            font-size: 32px;
+            color: var(--color-secondary);
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .orb-text-small {
+            font-size: 14px;
+            display: block;
+            margin-top: 10px;
+            font-weight: 400;
+            color: var(--color-dark-gray);
+        }
+
+        /* ============================================================================
+           CTA BUTTONS
+           ============================================================================ */
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-secondary);
+            color: var(--color-light);
+        }
+
+        .btn-primary:hover {
+            background: #2d6a99;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(57,135,184,0.3);
+        }
+
+        .btn-secondary {
+            background: var(--color-light-gray);
+            color: var(--color-primary);
+            border: 1px solid var(--color-dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: var(--color-light);
+        }
+
+        /* ============================================================================
+           LOCATIONS SECTION
+           ============================================================================ */
+
+        .locations-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-title {
+            font-size: var(--font-h2);
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--color-primary);
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .location-card {
+            background: var(--color-light);
+            border: 1px solid var(--color-light-gray);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .location-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(57,135,184,0.15);
+            border-color: var(--color-secondary);
+        }
+
+        .location-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #2d6a99 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .location-card:hover .location-image::before {
+            opacity: 1;
+        }
+
+        .location-content {
+            padding: 30px;
+        }
+
+        .location-name {
+            font-size: var(--font-h3);
+            margin-bottom: 12px;
+            color: var(--color-primary);
+        }
+
+        .location-description {
+            font-size: 14px;
+            color: var(--color-dark-gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .location-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--color-dark-gray);
+            padding-top: 20px;
+            border-top: 1px solid var(--color-light-gray);
+        }
+
+        .location-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--color-secondary);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .location-button:hover {
+            background: #2d6a99;
+        }
+
+        /* ============================================================================
+           INTERACTIVE MAP
+           ============================================================================ */
+
+        .map-section {
+            background: var(--color-light-gray);
+            padding: 80px 40px;
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 16px;
+            border: 2px solid var(--color-secondary);
+            background: linear-gradient(135deg, #e8f0f7 0%, #f5f7fa 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--color-secondary);
+        }
+
+        /* ============================================================================
+           AUDIO PLAYER
+           ============================================================================ */
+
+        .player-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .player-card {
+            background: var(--color-light-gray);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .player-title {
+            font-size: var(--font-h2);
+            margin-bottom: 20px;
+            color: var(--color-primary);
+        }
+
+        .player-description {
+            font-size: 16px;
+            color: var(--color-dark-gray);
+            margin-bottom: 30px;
+        }
+
+        .audio-player {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .play-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-button:hover {
+            background: #2d6a99;
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--color-light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--color-secondary);
+            width: 30%;
+            transition: width 0.1s;
+        }
+
+        .time {
+            font-size: 12px;
+            color: var(--color-dark-gray);
+            min-width: 40px;
+        }
+
+        /* ============================================================================
+           FOOTER
+           ============================================================================ */
+
+        footer {
+            background: var(--color-primary);
+            color: var(--color-light);
+            padding: 60px 40px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ============================================================================
+           MODAL / DETAIL VIEW
+           ============================================================================ */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--color-dark-gray);
+        }
+
+        .modal-header {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--color-primary);
+        }
+
+        .modal-text {
+            color: var(--color-dark-gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* ============================================================================
+           RESPONSIVE
+           ============================================================================ */
+
+        @media (max-width: 768px) {
+            :root {
+                --font-h1: 36px;
+                --font-h2: 28px;
+                --font-h3: 24px;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .glass-orb {
+                width: 280px;
+                height: 280px;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            #map {
+                height: 300px;
+            }
+
+            .locations-section,
+            .player-section,
+            .map-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-orb">✧</div>
+                <div class="logo-text">
+                    <strong>Unwritten</strong>
+                    <span>Nürnberg</span>
+                </div>
+            </div>
+            <nav>
+                <a onclick="scrollToSection('locations')">Orte</a>
+                <a onclick="scrollToSection('map')">Karte</a>
+                <a onclick="scrollToSection('player')">Audio</a>
+                <a onclick="alert('Über Nürnberg')" style="color: var(--color-secondary);">Über</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO – GLASKUGEL -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Nürnberg<br>Entdecken</h1>
+            <p>Stelle deine Frage an die Glaskugel. Die KI offenbart dir Geheimnisse, Geschichten und verborgene Winkel einer der schönsten Städte Deutschlands.</p>
+
+            <!-- GLASS ORB -->
+            <div class="glass-orb-container">
+                <div class="glass-orb">
+                    <div class="orb-glow"></div>
+                    <div class="orb-text">
+                        ?
+                        <span class="orb-text-small">Was möchtest du über Nürnberg wissen?</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('locations')">Orte Erkunden</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('player')">Tour Hören</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATIONS -->
+    <section class="locations-section" id="locations">
+        <h2 class="section-title">Nürnbergs Schätze</h2>
+        <div class="locations-grid" id="locationsGrid"></div>
+    </section>
+
+    <!-- MAP -->
+    <section class="map-section" id="map-section">
+        <div class="map-container">
+            <h2 class="section-title">Interaktive Karte</h2>
+            <div id="map">🗺️ Nürnberg Map wird hier geladen...</div>
+        </div>
+    </section>
+
+    <!-- AUDIO PLAYER -->
+    <section class="player-section" id="player">
+        <div class="player-card">
+            <h2 class="player-title">Audiofassung</h2>
+            <p class="player-description">Höre die Geschichte von Nürnberg. Dauer: 45 Minuten</p>
+            
+            <div class="audio-player">
+                <button class="play-button" id="playBtn" onclick="togglePlay()">▶</button>
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <span class="time" id="time">0:00</span>
+                <span class="time">/ 45:00</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Unwritten</h4>
+                <p>Entdecke Städte durch Geschichten. Deine persönliche KI-Begleitung erzählt dir Nürnberg auf neue Weise.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <p>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Über uns</a><br>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Kontakt</a><br>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Datenschutz</a>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Unwritten GmbH</h4>
+                <p>Adlerweg 6<br>90530 Wendelstein<br>post@unwritten.studio</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Unwritten Studio. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-header" id="modalTitle"></div>
+            <div class="modal-text" id="modalText"></div>
+            <button class="btn btn-primary" onclick="closeModal()">Schließen</button>
+        </div>
+    </div>
+
+    <script>
+        // LOCATIONS DATA
+        const locations = [
+            {
+                emoji: '🏰',
+                name: 'Nürnberger Burg',
+                short: 'Die mächtige Burganlage über der Stadt',
+                description: 'Die Nürnberger Burg ist eine der bedeutendsten Burgen des Heiligen Römischen Reiches. Mit ihrer über 900-jährigen Geschichte thront sie majestätisch über der Stadt und bietet spektakuläre Ausblicke über Nürnberg und die umliegende Landschaft. Die Burg beherbergt ein Museum, das die Geschichte der Region erzählt.',
+                year: 'seit 1140'
+            },
+            {
+                emoji: '⛪',
+                name: 'Sebalduskirche',
+                short: 'Gotische Schönheit im Herzen der Stadt',
+                description: 'Die Sebalduskirche ist eine der ältesten und bedeutendsten Kirchen Nürnbergs. Mit ihren charakteristischen Zwiebeldächern und der wunderschönen Gotik ist sie ein Meisterwerk der Architektur. Im Inneren findet man kostbare Kunstwerke und historische Kunstschätze.',
+                year: 'seit 1225'
+            },
+            {
+                emoji: '👸',
+                name: 'Frauenkirche',
+                short: 'Ein Wahrzeichen der Gotik',
+                description: 'Die Frauenkirche mit ihrer prächtigen Fassade ist eines der schönsten gotischen Gebäude Deutschlands. Sie wurde auf dem Platz der ehemaligen Synagoge erbaut und ist bekannt für das Glockenspiel auf der Fassade, das täglich um 12 Uhr die "Männlein" erklingen lässt.',
+                year: 'seit 1352'
+            },
+            {
+                emoji: '🎄',
+                name: 'Christkindles Markt',
+                short: 'Der älteste Weihnachtsmarkt Deutschlands',
+                description: 'Jedes Jahr verwandelt sich der Hauptmarkt in ein Wunderland aus Lichtern, Düften und traditionellen Handwerksprodukten. Der Christkindles Markt ist der älteste und einer der schönsten Weihnachtsmärkte Deutschlands mit über 180 Jahren Tradition.',
+                year: 'seit 1839'
+            },
+            {
+                emoji: '🎨',
+                name: 'Germanisches Nationalmuseum',
+                short: 'Eines der größten deutschen Museen',
+                description: 'Das Germanische Nationalmuseum beherbergt eine der bedeutendsten Sammlungen zur Geschichte und Kultur Deutschlands. Mit über einer Million Objekten ist es ein Schatz von künstlerischen, kulturellen und historischen Werken aus verschiedenen Epochen.',
+                year: 'seit 1852'
+            },
+            {
+                emoji: '🚲',
+                name: 'Alte Stadt',
+                short: 'Mittelalterliches Flair in der Altstadt',
+                description: 'Die Altstadt Nürnbergs ist eine der schönsten und besterhaltenen mittelalterlichen Stadtanlagen Deutschlands. Mit ihren gepflasterten Gassen, malerischen Fachwerkhäusern und historischen Plätzen ist ein Spaziergang durch die Altstadt eine Reise zurück in die Zeit der Gotik und Renaissance.',
+                year: 'seit 12. Jahrhundert'
+            }
+        ];
+
+        // RENDER LOCATIONS
+        function renderLocations() {
+            const grid = document.getElementById('locationsGrid');
+            grid.innerHTML = locations.map((loc, i) => `
+                <div class="location-card" onclick="openModal('${loc.name}', '${loc.description}')">
+                    <div class="location-image">${loc.emoji}</div>
+                    <div class="location-content">
+                        <div class="location-name">${loc.name}</div>
+                        <div class="location-description">${loc.short}</div>
+                        <div class="location-meta">
+                            <span>${loc.year}</span>
+                        </div>
+                        <button class="location-button">Mehr erfahren</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // MODAL FUNCTIONS
+        function openModal(title, text) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalText').textContent = text;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // SCROLL TO SECTION
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // AUDIO PLAYER
+        let isPlaying = false;
+        let progress = 0;
+
+        function togglePlay() {
+            const btn = document.getElementById('playBtn');
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                btn.textContent = '⏸';
+                startProgress();
+            } else {
+                btn.textContent = '▶';
+            }
+        }
+
+        function startProgress() {
+            const interval = setInterval(() => {
+                if (!isPlaying) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                progress += 0.5;
+                if (progress > 100) {
+                    progress = 100;
+                    isPlaying = false;
+                    document.getElementById('playBtn').textContent = '▶';
+                    clearInterval(interval);
+                }
+                
+                document.getElementById('progress').style.width = progress + '%';
+                const minutes = Math.floor((progress / 100) * 45);
+                const seconds = Math.floor(((progress / 100) * 45 * 60) % 60);
+                document.getElementById('time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }, 100);
+        }
+
+        // INIT
+        renderLocations();
+    </script>
+</body>
+</html>
